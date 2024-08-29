@@ -11,7 +11,7 @@ import be.scri.databinding.ActivityMainBinding
 class MainActivity : SimpleActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var viewPager: ViewPager2
+    private lateinit var viewpager: ViewPager2
     private lateinit var adapter: ViewPagerAdapter
     private lateinit var binding: ActivityMainBinding
 

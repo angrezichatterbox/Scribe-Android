@@ -24,7 +24,7 @@ jobs:
         run: curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.45.2/ktlint && chmod a+x ktlint
 
       - name: Run ktlint
-        run: ./ktlint --relative "**/*.kt" --reporter=checkstyle,output=ktlint-checkstyle-report.xml || echo "ktlint found issues"
+        run: ./ktlint --relative "**/*.kt" --reporter=checkstyle,output=ktlint-checkstyle-report.xml
 
       - name: Upload lint reports
         if: failure()

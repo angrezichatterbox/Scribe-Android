@@ -1,15 +1,16 @@
 fun main() {
-    val x = 5 // Missing space around '='
+    val x = 5
     var y = 10
-    if (x < y) { // Missing space around '<'
+    if (x < y) {
         println("x is less than y")
     }
 
-    for(i in 0 ..10) { // Missing space around '..'
-        if (i % 2 == 0)
-            println(i) // Missing braces
-        else
+    for (i in 0..10) {
+        if (i % 2 == 0) {
+            println(i)
+        } else {
             println("Odd number: $i")
+        }
     }
 
     val z: Int = 42
@@ -17,7 +18,7 @@ fun main() {
         0 -> println("Zero")
         1 -> println("One")
         2 -> println("Two")
-        else -> println("Other") // No newline at end of file
+        else -> println("Other")
     }
 }
 

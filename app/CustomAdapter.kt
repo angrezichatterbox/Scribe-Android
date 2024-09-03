@@ -1,11 +1,11 @@
 fun main() {
-    val x=5 // Missing space around '='
-    var y=10
-    if (x<y) { // Missing space around '<'
+    val x = 5 // Missing space around '='
+    var y = 10
+    if (x < y) { // Missing space around '<'
         println("x is less than y")
     }
 
-    for(i in 0..10) { // Missing space around '..'
+    for(i in 0 ..10) { // Missing space around '..'
         if (i % 2 == 0)
             println(i) // Missing braces
         else

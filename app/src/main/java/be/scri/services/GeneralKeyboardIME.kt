@@ -396,6 +396,13 @@ abstract class GeneralKeyboardIME(
         }
     }
 
+    private fun switchKeyboardLayout(newLayout: Int) {
+        keyboard = KeyboardBase(this, newLayout, enterKeyType)
+        Log.i("MY-TAG", "This is the Switch keyboard layout")
+        keyboardView?.setKeyboard(keyboard!!)
+        keyboardView?.invalidate()
+    }
+
     /**
      * Commits a period after a space character.
      * This method is typically used to automatically insert a period
@@ -653,6 +660,10 @@ abstract class GeneralKeyboardIME(
         }
         binding.translateBtn.setOnClickListener {
             Log.i("MY-TAG", "TRANSLATE STATE")
+            var x =
+                getSharedPreferences("app_preferences", MODE_PRIVATE)
+                    .getString("translation_source_$language", "English")
+            keyboardView?.invalidateAllKeys()
             updateCommandBarHintAndPrompt()
             currentState = ScribeState.TRANSLATE
             updateUI()

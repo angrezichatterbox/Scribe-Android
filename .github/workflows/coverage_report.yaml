@@ -1,0 +1,44 @@
+name: Code Coverage Report
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run Tests and Generate JaCoCo Report
+        run: |
+          ./gradlew test jacocoTestReport 
+
+      - name: Extract Code Coverage from index.html
+        run: |
+          COVERAGE=$(grep -oP '(?<=<tfoot>).*?(?=</tfoot>)' html/index.html | grep -oP '\d+%' | tail -1)
+          echo "Code Coverage: $COVERAGE"
+          echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
+
+      - name: Fail if Coverage is Too Low
+        run: |
+          MIN_COVERAGE=50  # Set your threshold
+          COVERAGE_NUM=$(echo $COVERAGE | tr -d '%')
+          if [ "$COVERAGE_NUM" -lt "$MIN_COVERAGE" ]; then
+            echo "❌ Code coverage ($COVERAGE) is below threshold ($MIN_COVERAGE%)"
+            exit 1
+          else
+            echo "✅ Code coverage is sufficient ($COVERAGE)"
+          fi

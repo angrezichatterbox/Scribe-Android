@@ -30,18 +30,22 @@ class ConjugateDataManager(
         jsonData: DataContract?,
         word: String,
     ): MutableMap<String, MutableMap<String, Collection<String>>> {
+        Log.i("OUTPUT-CONJUGATE","Getting the conjugate labels")
+        Log.i("OUTPUT-CONJUGATE","The word would be $word and the language is $language")
+        Log.i("OUTPUT-CONJUGATE","The final conjugate output would be $")
         val finalOutput: MutableMap<String, MutableMap<String, Collection<String>>> = mutableMapOf()
         jsonData?.conjugations?.values?.forEach { tenseGroup ->
             val conjugateForms: MutableMap<String, Collection<String>> = mutableMapOf()
             tenseGroup.conjugationTypes.values.forEach { conjugationCategory ->
                 val forms =
                     conjugationCategory.conjugationForms.values.map { form ->
-                        getTheValueForTheConjugateWord(word, form, language)
+                        getTheValueForTheConjugateWord(word.lowercase(), form, language)
                     }
                 conjugateForms[conjugationCategory.title] = forms
             }
             finalOutput[tenseGroup.title] = conjugateForms
         }
+        Log.i("OUTPUT-CONJUGATE","The final conjugate output would be $finalOutput")
         return finalOutput
     }
 

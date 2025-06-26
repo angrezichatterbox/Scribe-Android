@@ -16,6 +16,7 @@ import android.text.InputType.TYPE_CLASS_NUMBER
 import android.text.InputType.TYPE_CLASS_PHONE
 import android.text.InputType.TYPE_MASK_CLASS
 import android.text.TextUtils
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -1583,6 +1584,7 @@ abstract class GeneralKeyboardIME(
                 rawInput,
             )
 
+        Log.i("OUTPUT-CONJUGATE","The value of the conjugation output is $conjugateOutput")
         conjugateLabels =
             dbManagers.conjugateDataManager.extractConjugateHeadings(
                 dataContract,

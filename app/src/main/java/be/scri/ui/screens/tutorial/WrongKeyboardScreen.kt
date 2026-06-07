@@ -22,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -61,9 +62,11 @@ fun WrongKeyboardScreen(
     modifier: Modifier = Modifier,
 ) {
     val isDarkTheme = isSystemInDarkTheme()
-    val backgroundColor = if (isDarkTheme) TutorialColors.darkBackground else TutorialColors.lightBackground
-    val cardBackground = if (isDarkTheme) TutorialColors.cardBackgroundDark else TutorialColors.cardBackgroundLight
-    val textColor = if (isDarkTheme) TutorialColors.textPrimaryDark else TutorialColors.textPrimary
+    val backgroundColor = MaterialTheme.colorScheme.background
+    val cardBackground = MaterialTheme.colorScheme.surface
+    val textColor = MaterialTheme.colorScheme.onSurface
+    val dividerColor = MaterialTheme.colorScheme.outlineVariant
+    val headerColor = MaterialTheme.colorScheme.onBackground
 
     var userInput by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
@@ -94,7 +97,7 @@ fun WrongKeyboardScreen(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                     contentDescription = "Back",
-                    tint = Color.White,
+                    tint = headerColor,
                     modifier = Modifier.size(28.dp),
                 )
             }
@@ -102,7 +105,7 @@ fun WrongKeyboardScreen(
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = "Close tutorial",
-                    tint = Color.White,
+                    tint = headerColor,
                     modifier = Modifier.size(24.dp),
                 )
             }
@@ -111,7 +114,7 @@ fun WrongKeyboardScreen(
         // Title
         Text(
             text = "Non-Scribe keyboard",
-            color = Color.White,
+            color = headerColor,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 20.dp),
@@ -142,7 +145,7 @@ fun WrongKeyboardScreen(
                 Spacer(modifier = Modifier.padding(8.dp))
 
                 HorizontalDivider(
-                    color = if (isDarkTheme) TutorialColors.dividerDark else TutorialColors.dividerLight,
+                    color = dividerColor,
                 )
 
                 // Hidden input field that brings up the keyboard.
@@ -166,7 +169,7 @@ fun WrongKeyboardScreen(
                 )
 
                 HorizontalDivider(
-                    color = if (isDarkTheme) TutorialColors.dividerDark else TutorialColors.dividerLight,
+                    color = dividerColor,
                 )
             }
         }
